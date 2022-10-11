@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"> 
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script>
+    <title>Sabal's Portfolio</title>
+</head>
+<body>
+    <header>
+        <div class="navbar" style="width: 30%;">
+            <a href="index.html">
+                @sabaldahal
+            </a>
+        </div>
+    </header>
+
+<div class="form-full">
+    <div class="mapnav">
+        Some notes on this Web App.
+        <p>
+            I was working on building the website of Community Engagement Core 
+            at the University of Cincinnati when I was given the task of embedding a map 
+            to their website.
+            I learned about OpenLayers which is an Open-Source JavaScript library and provides
+            an api to build maps similar to Google Maps.
+        </p>
+        <p>
+            While I was working on the website, I was also on a constant lookout for an apartment. 
+            I would visit websites like apartments.com everyday. I was very fsacinated by their website 
+            where multiple homes along with their description were displayed on the map.
+        </p>
+        <p>
+            Just then, I had the idea to create a web app of my own, where the users can generate a map 
+            of their own in just a few easy steps. There are multiple things I will be updating to this application 
+            in the future updates.
+        </p>
+        <p>
+            Some of things I have planned for future updates:
+            <ol>
+                <li>Create an API to allow users to add the generated map quickly to their site</li>
+                <li>Allow users to edit the initial ViewPort Coordinates once it has been set successfully</li>
+                
+            </ol>
+        </p>
+    </div>
+    <div class="map-canvas">
+    <div id="map">
+        <div id="popup" class="map-popup">
+            <a href="#">
+                <div class="popup-content"></div>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+<!-- Load Scripts-->
+<script src = "pass values.js"></script>
+<script src="load map.js"></script>
+</body>
+</html>
