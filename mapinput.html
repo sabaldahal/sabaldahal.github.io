@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <title>Sabal's Portfolio</title>
+</head>
+<body>
+        <header>
+            <div class="navbar" style="background: #000;">
+                <a href="index.html">
+                @sabaldahal
+                </a>
+            </div>
+        </header>
+        <div class="form-full">
+            <div class="left">
+                <div class="instructions">
+                    <p>
+                        Instructions:
+                    </p>
+                    Begin by initializing the viewport of the map. (This is the first location that will be shown while displaying the map)
+                    <br>
+                    Next, choose a value for the zoom(0 being the farthest and 22 being the closest)
+                    <br>
+                    Add at least one marker. Enter the coordinate and that is where the marker will be placed.
+                    <br> 
+                    You can add as many markers as you like by clicking on 'Add Marker' button. 
+                    <br>
+                    Click Generate to see the map.
+
+                    <p>Notice that once you add a valid initial viewport's coordinate and a zoom value,
+                        you cannot make changes to them. Errors will be displayed on the screen.
+                    </p>
+                    <p>
+                        Markers added will be displayed below:
+                    </p>
+                </div>
+                <ol>
+
+                </ol>
+            </div>
+            <div class="right">
+
+            
+        <form>
+            <section class="">
+                MAP
+            </section>
+            
+            <div class="in-container">
+                <label for="lat-main">Initial ViewPort Coordinate*</label>
+                <input id="lat-main" name="lat-main" placeholder="latitude" type="number">
+            </div>
+            <div class="in-container">
+                <label for="long-main"></label>
+                <input id="long-main" name="long-main" placeholder="longitude" type="number">
+            </div>
+            <div class="in-container">
+                <label for="zoom"> Zoom* </label>
+                <select style="width: 50%; cursor: pointer; color: rgb(70, 70, 70);" name="zoom" id="zoom">
+                    <option value="">--please select a value--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    
+                </select>
+           </div>
+            <div class="in-container markerContents">
+                <label for="lat"><strong>Add Marker Details*</strong></label>
+                <input id="lat" name="lat" placeholder="latitude" type="number">
+            </div>
+            <div class="in-container markerContents">
+                <label for="long"></label>
+                <input id="long" name="long" placeholder="longitude" type="number">
+            </div>
+            <div class="in-container markerContents">
+                <label for="title">Description For Marker</label>
+                <input id="title" name="title" placeholder="title goes here" type="text">
+            </div>
+            <div class="in-container markerContents">
+                <label for="description"></label>
+                <input id="description" name="description" placeholder="type the description here..." type="text">
+            </div>
+            <div class="markerCount">
+                Markers Added: <span></span>
+            </div>
+            <div class="errorbox">
+                
+            </div>
+            <button id="addmarker">Add Marker</button>
+            
+            <button id="sbmt" type="button">Generate</button>
+            <div style="clear:both; font-size:12px; display:block; width: 100%">*add all markers before clicking Generate button</div>
+        </form>
+    </div>
+</div>
+
+        <footer>
+        </footer>
+
+<!-- Load Scripts-->
+
+    <script src="map form_addmarker.js"></script>
+</body>
+</html>
