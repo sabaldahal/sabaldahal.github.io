@@ -26,26 +26,20 @@
         </div>
     </header>
 
+    
+
 <div class="form-full">
     <div class="mapnav">
-        <div class="codeBar" id="first-snippet">
-            <div class="copy-to-clipboard">
-                
-                <i class="fa fa-thin fa-paste"></i>Copy Code Snippet
-            </div>
-        <div class="copyCode">
-            <!--link to CSS file; style map, overlay and its contents-->
-            <code>
-                &lt;<span class="codeColor">link&nbsp;</span><span class="codeColor-first">rel</span>=<span class="codeColor-second">"stylesheet"&nbsp;</span><span class="codeColor-first">href</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"</span>&gt;
-            </code>
-            <br>
-            <!--link to Javascript file; loads map-->
-            <code>
-                &lt;<span class="codeColor">script</span>&nbsp;<span class="codeColor-first">src</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"</span>&gt;
-            </code>                             
-        </div>
-        </div>
+        <h3>
+            To add this map to your site, follow the instructions carefully.
+        </h3>
+        <p>
+            1. Include the following in the head of your HTML page.
+        </p>
 
+        <p style="font-size: 14px;">
+            The following contains script and stylesheet for displaying customized map.
+        </p>
         <div class="codeBar" id="second-snippet">
                 <div class="copy-to-clipboard">
                     <i class="fa fa-thin fa-paste"></i>Copy Code Snippet
@@ -59,40 +53,48 @@
                 <br>
                 <!--link to Javascript file; loads map-->
                 <code>
-                    &lt;<span class="codeColor">script</span>&nbsp;<span class="codeColor-first">src</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/sabaldahal/sabaldahal.github.io@main/user_loadMap.js"</span>&gt;
+                    &lt;<span class="codeColor">script</span>&nbsp;<span class="codeColor-first">src</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/sabaldahal/sabaldahal.github.io@main/user_loadMap.js"</span>&gt;&lt;/<span class="codeColor">script</span>&gt;
                 </code>                             
             </div>
             </div>
-
+            <p style="font-size: 14px;">
+                The following contains links to OpenLayers package.
+                Additional information can be found <a target="_blank" href="https://openlayers.org/" style="text-decoration: none; color: yellow;">here.</a>
+            </p>
+            <div class="codeBar" id="first-snippet">
+                <div class="copy-to-clipboard">
+                    
+                    <i class="fa fa-thin fa-paste"></i>Copy Code Snippet
+                </div>
+            <div class="copyCode">
+                <!--link to CSS file; style map, overlay and its contents-->
+                <code>
+                    &lt;<span class="codeColor">link&nbsp;</span><span class="codeColor-first">rel</span>=<span class="codeColor-second">"stylesheet"&nbsp;</span><span class="codeColor-first">href</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"</span>&gt;
+                </code>
+                <br>
+                <!--link to Javascript file; loads map-->
+                <code>
+                    &lt;<span class="codeColor">script</span>&nbsp;<span class="codeColor-first">src</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"</span>&gt;&lt;/<span class="codeColor">script</span>&gt;
+                </code>                             
+            </div>
+            </div>
+            <p>
+                2. Download the JSON file containing data for loading map.
+            </p>
+            <p style="font-size:14px;">
+                The following file should be included in the same root directory as your HTML files.
+            </p>
             <div class="codeBar">
                 <div class="copyCode" style="text-align: center;">
                     Click here to download JSON file
                     <button id="download-JSON">Download</button>
                 </div>
             </div>
-        Some notes on this Web App.
+
         <p>
-            I was working on building the website of Community Engagement Core 
-            at the University of Cincinnati when I was given the task of embedding a map 
-            to their website.
-            I learned about OpenLayers which is an Open-Source JavaScript library and provides
-            an api to build maps similar to Google Maps.
-        </p>
-        <p>
-            While I was working on the website, I was also on a constant lookout for an apartment. 
-            I would visit websites like apartments.com everyday. I was very fsacinated by their website 
-            where multiple homes along with their description were displayed on the map.
-        </p>
-        <p>
-            Just then, I had the idea to create a web app of my own, where the users can generate a map 
-            of their own in just a few easy steps. There are multiple things I will be updating to this application 
-            in the future updates.
-        </p>
-        <p>
-            Some of things I have planned for future updates:
+            Upcoming future updates:
             <ol>
-                <li>Create an API to allow users to add the generated map quickly to their site</li>
-                <li>Allow users to edit the initial ViewPort Coordinates once it has been set successfully</li>
+                <li>Option for editing the markers before generating map</li>
                 
             </ol>
         </p>
