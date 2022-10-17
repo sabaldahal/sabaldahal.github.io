@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"> 
     <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"></script>
     <title>Sabal's Portfolio</title>
@@ -20,6 +21,48 @@
 
 <div class="form-full">
     <div class="mapnav">
+        <div class="codeBar" id="first-snippet">
+            <div class="copy-to-clipboard">
+                
+                <i class="fa fa-thin fa-paste"></i>Copy Code Snippet
+            </div>
+        <div class="copyCode">
+            <!--link to CSS file; style map, overlay and its contents-->
+            <code>
+                &lt;<span class="codeColor">link&nbsp;</span><span class="codeColor-first">rel</span>=<span class="codeColor-second">"stylesheet"&nbsp;</span><span class="codeColor-first">href</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/css/ol.css"</span>&gt;
+            </code>
+            <br>
+            <!--link to Javascript file; loads map-->
+            <code>
+                &lt;<span class="codeColor">script</span>&nbsp;<span class="codeColor-first">src</span>=<span class="codeColor-second">"https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.15.1/build/ol.js"</span>&gt;
+            </code>                             
+        </div>
+        </div>
+
+        <div class="codeBar" id="second-snippet">
+                <div class="copy-to-clipboard">
+                    <i class="fa fa-thin fa-paste"></i>Copy Code Snippet
+                </div>
+            <div class="copyCode">
+
+                <!--link to CSS file; style map, overlay and its contents-->
+                <code>
+                    &lt;<span class="codeColor">link&nbsp;</span><span class="codeColor-first">rel</span>=<span class="codeColor-second">"stylesheet"&nbsp;</span><span class="codeColor-first">src</span>=<span class="codeColor-second">"linkxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxhere"</span>&gt;
+                </code>
+                <br>
+                <!--link to Javascript file; loads map-->
+                <code>
+                    &lt;<span class="codeColor">script</span>&nbsp;<span class="codeColor-first">src</span>=<span class="codeColor-second">"link here"</span>&gt;
+                </code>                             
+            </div>
+            </div>
+
+            <div class="codeBar">
+                <div class="copyCode" style="text-align: center;">
+                    Click here to download JSON file
+                    <button id="download-JSON">Download</button>
+                </div>
+            </div>
         Some notes on this Web App.
         <p>
             I was working on building the website of Community Engagement Core 
@@ -61,7 +104,7 @@
 
 
 <!-- Load Scripts-->
-<script src = "pass values.js"></script>
 <script src="load map.js"></script>
+<script src="map_snippet.js"></script>
 </body>
 </html>
