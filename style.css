@@ -250,6 +250,9 @@ footer {
     overflow-x: scroll;
 
 }
+.copyCode code{
+    white-space: nowrap;
+}
 .copyCode button{
     position: relative;
     display: block;
