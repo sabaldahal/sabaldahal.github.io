@@ -140,7 +140,7 @@ header {
     
 }
 .left {
-    background: rgb(2, 12, 27, 0.8);
+    background: rgb(2, 12, 27, 0.9);
     background-size: cover;
     flex-direction: column;
     padding: 30px;
