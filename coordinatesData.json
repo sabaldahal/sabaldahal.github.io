@@ -1,0 +1,27 @@
+{
+  "viewport": {
+    "lat_main": "39",
+    "long_main": "-83",
+    "zoom": "12"
+  },
+  "markers": [
+    {
+      "lat": "39",
+      "long": "-83",
+      "title": "What up",
+      "description": "What up"
+    },
+    {
+      "lat": "40",
+      "long": "-83",
+      "title": "Two plus two",
+      "description": "is Four"
+    },
+    {
+      "lat": "41",
+      "long": "-83",
+      "title": "minus one",
+      "description": "that's 3; quick math"
+    }
+  ]
+}
