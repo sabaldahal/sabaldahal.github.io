@@ -85,7 +85,7 @@ header {
     color: rgb(42, 227, 156);
 }
 .content h1 span{
-    color: #fff;
+    color: #8892b0;
 }
 .content h3{
     font-size: 20px;
@@ -140,7 +140,7 @@ header {
     
 }
 .left {
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5)), url('board.jpg');
+    background: rgb(2, 12, 27, 0.8);
     background-size: cover;
     flex-direction: column;
     padding: 30px;
