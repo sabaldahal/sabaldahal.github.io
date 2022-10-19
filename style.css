@@ -28,12 +28,13 @@ header {
 
 .navbar a {
     text-decoration: none;
-    color: #fff;
+    color: rgb(42, 227, 156);
 }
 
 .navbar .socials a{
     text-decoration: none;
     padding: 0 12px;
+    color: rgb(42, 227, 156);
 }
 
 #mainVideo{
@@ -71,6 +72,7 @@ header {
 .content h1{
     font-size: 70px;
     margin: 80px 0 20px;
+    color: rgb(42, 227, 156);
 }
 .content p{
     margin: 0px auto 20px;
@@ -85,7 +87,7 @@ header {
     margin: 20px 10px;
     border-radius: 25px;
     font-weight: bold;
-    border: 2px solid #94e1e2;
+    border: 2px solid rgb(42, 227, 156);
     background: transparent;
     color: #ffffff;
     cursor: pointer;
@@ -94,24 +96,10 @@ header {
 
 }
 
-.content span {
-    background: #94e1e2;
-    height: 100%;
-    width: 0%;
-    border-radius: 25px;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0.5s;
-}
 
-.content button:hover span{
-    width: 100%;
-}
 
 .content button:hover{
-    border: none;
+    background-color: rgb(42, 227, 156);
 }
 
 .form-full {
