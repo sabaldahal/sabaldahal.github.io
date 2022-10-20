@@ -1,4 +1,5 @@
-console.log(document.querySelectorAll('.video-grid video'))
+const popup_video = document.querySelector('.popup-video');
+
 document.querySelectorAll('.video-grid video').forEach(one => {
     one.addEventListener('mouseover', (eve)=>{
         one.muted = true;
@@ -12,17 +13,18 @@ document.querySelectorAll('.video-grid video').forEach(one => {
     })
     one.onclick = () => {
         console.log(one.getAttribute('src'));
-        document.querySelector('.popup-video').style.display = 'block';
-        document.querySelector('.popup-video video').src = one.getAttribute('src');
+        popup_video.style.display = 'block';
+        popup_video.querySelector('video').src = one.getAttribute('src');
 
     }
 });
 
-document.querySelector('.popup-video span').onclick = () => {
-    let curr = document.querySelector('.popup-video');
-    curr.style.display = 'none';
-    let curr_video = curr.querySelector('video');
-    curr_video.pause();
-    curr_video.currentTime = 0;
-    
+
+popup_video.onclick = function(evt) {
+    if((evt.target) !=  popup_video.querySelector('video')){
+        popup_video.style.display = 'none';
+        let popup_videoElement = popup_video.querySelector('video');
+        popup_videoElement.pause();
+        popup_videoElement.currentTime = 0;
+    }
 }
