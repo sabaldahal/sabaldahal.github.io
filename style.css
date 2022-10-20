@@ -168,7 +168,18 @@ header {
     opacity: 1;
     transition: opacity .3s linear;
 }
+.video-grid span{
+    position: absolute;
+    bottom: 5%;
+    right: 4%;
+    color: rgb(42, 227, 156);
+    font-weight: bold;
+    z-index: 10;
+    padding: 10px 10px;
+    border-radius: 5px;
+    background: rgb(2, 12, 27, 0.8);
 
+}
 .video-grid video{
     display: block;
 }
