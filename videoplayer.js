@@ -1,5 +1,5 @@
 const popup_video = document.querySelector('.popup-video');
-
+// format video duration to minute and seconds
 function time_string(value){
     let min = value / 60;
     min = Math.floor(min);
