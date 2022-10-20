@@ -12,4 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 
           lfs: true # Fetches LFS data
