@@ -1,24 +1,57 @@
 const popup_video = document.querySelector('.popup-video');
 
-document.querySelectorAll('.video-grid video').forEach(one => {
+
+// document.querySelectorAll('.video-grid div').forEach(one => {
+//     let div_video = one.querySelector('video');
+//     let div_img = one.querySelector('img');
+//     one.addEventListener('mouseover', (eve)=>{
+//         div_img.style.display = 'none';
+//         div_video.style.display = 'block';    
+//         div_video.muted = true;
+//         div_video.currentTime = div_video.duration - (0.7 * div_video.duration);
+//         div_video.play();
+//     })
+//     one.addEventListener('mouseleave', (eve)=>{
+//         div_img.style.display = 'block';
+//         div_video.style.display = 'none';
+//         div_video.removeAttribute('muted');
+//         div_video.currentTime = 0;
+//         div_video.pause();
+//     })
+//     one.onclick = () => {
+//         popup_video.style.display = 'block';
+//         popup_video.querySelector('video').src = div_video.getAttribute('src');
+
+//     }
+// });
+
+document.querySelectorAll('.video-grid div').forEach(one => {
+    let div_video = one.querySelector('video');
+    let div_img = one.querySelector('img');
+    console.log(div_img);
+
     one.addEventListener('mouseover', (eve)=>{
-        one.muted = true;
-        one.currentTime = one.duration - (0.7 * one.duration);
-        one.play();
+        if(div_img != null){
+            div_img.style.opacity = 0;
+        }    
+        div_video.muted = true;
+        div_video.currentTime = div_video.duration - (0.7 * div_video.duration);
+        div_video.play();
     })
     one.addEventListener('mouseleave', (eve)=>{
-        one.removeAttribute('muted');
-        one.currentTime = 0;
-        one.pause();
+        if(div_img != null){
+            div_img.style.opacity = 1;
+        }
+        div_video.removeAttribute('muted');
+        div_video.currentTime = 0;
+        div_video.pause();
     })
     one.onclick = () => {
-        console.log(one.getAttribute('src'));
         popup_video.style.display = 'block';
-        popup_video.querySelector('video').src = one.getAttribute('src');
+        popup_video.querySelector('video').src = div_video.getAttribute('src');
 
     }
 });
-
 
 popup_video.onclick = function(evt) {
     if((evt.target) !=  popup_video.querySelector('video')){
