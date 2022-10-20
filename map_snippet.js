@@ -1,5 +1,6 @@
 const firstSnippet = document.querySelector('#first-snippet');
 const secondSnippet = document.querySelector('#second-snippet');
+const thirdSnippet = document.querySelector('#third-snippet');
 
 
 const default_copy_msg = `<i class="fa fa-thin fa-paste"></i>Copy Code Snippet`;
@@ -20,6 +21,15 @@ secondSnippet.onclick = function(evt){
     secondSnippet.querySelector('.copy-to-clipboard').innerHTML = copied_msg;
     setTimeout(() => {
         secondSnippet.querySelector('.copy-to-clipboard').innerHTML = default_copy_msg;
+    }, 1500
+    );
+}
+
+thirdSnippet.onclick = function(evt){
+    navigator.clipboard.writeText(thirdSnippet.querySelector('.copyCode').innerText);
+    thirdSnippet.querySelector('.copy-to-clipboard').innerHTML = copied_msg;
+    setTimeout(() => {
+        thirdSnippet.querySelector('.copy-to-clipboard').innerHTML = default_copy_msg;
     }, 1500
     );
 }
