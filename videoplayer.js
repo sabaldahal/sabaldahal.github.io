@@ -1,39 +1,33 @@
 const popup_video = document.querySelector('.popup-video');
 
-
-// document.querySelectorAll('.video-grid div').forEach(one => {
-//     let div_video = one.querySelector('video');
-//     let div_img = one.querySelector('img');
-//     one.addEventListener('mouseover', (eve)=>{
-//         div_img.style.display = 'none';
-//         div_video.style.display = 'block';    
-//         div_video.muted = true;
-//         div_video.currentTime = div_video.duration - (0.7 * div_video.duration);
-//         div_video.play();
-//     })
-//     one.addEventListener('mouseleave', (eve)=>{
-//         div_img.style.display = 'block';
-//         div_video.style.display = 'none';
-//         div_video.removeAttribute('muted');
-//         div_video.currentTime = 0;
-//         div_video.pause();
-//     })
-//     one.onclick = () => {
-//         popup_video.style.display = 'block';
-//         popup_video.querySelector('video').src = div_video.getAttribute('src');
-
-//     }
-// });
-
+function time_string(value){
+    let min = value / 60;
+    min = Math.floor(min);
+    let seconds = value % 60; 
+    seconds = Math.floor(seconds);
+    if(min < 10) {
+        min = '0' + min;
+    };
+    if(seconds < 10){
+        seconds = '0' + seconds;
+    }  
+    return `${min}:${seconds}`;
+}
 document.querySelectorAll('.video-grid div').forEach(one => {
     let div_video = one.querySelector('video');
     let div_img = one.querySelector('img');
-    console.log(div_img);
+    let div_span = one.querySelector('span');
+    
+    div_video.onloadedmetadata = ()=>{
+        div_span.innerHTML = time_string(div_video.duration);      
+    }
+    
 
     one.addEventListener('mouseover', (eve)=>{
         if(div_img != null){
             div_img.style.opacity = 0;
-        }    
+        }
+        div_span.style.display = 'none';
         div_video.muted = true;
         div_video.currentTime = div_video.duration - (0.7 * div_video.duration);
         div_video.play();
@@ -42,6 +36,7 @@ document.querySelectorAll('.video-grid div').forEach(one => {
         if(div_img != null){
             div_img.style.opacity = 1;
         }
+        div_span.style.display = 'block';
         div_video.removeAttribute('muted');
         div_video.currentTime = 0;
         div_video.pause();
