@@ -14,6 +14,14 @@ function time_string(value){
     }  
     return `${min}:${seconds}`;
 }
+
+const close_popup = ()=>{
+    popup_video.style.display = 'none';
+    let popup_videoElement = popup_video.querySelector('video');
+    popup_videoElement.pause();
+    popup_videoElement.currentTime = 0;
+}
+
 document.querySelectorAll('.video-grid div').forEach(one => {
     let div_video = one.querySelector('video');
     let div_img = one.querySelector('img');
@@ -63,17 +71,11 @@ document.querySelectorAll('.video-grid div').forEach(one => {
 
 popup_video.onclick = function(evt) {
     if((evt.target) !=  popup_video.querySelector('video')){
-        popup_video.style.display = 'none';
-        let popup_videoElement = popup_video.querySelector('video');
-        popup_videoElement.pause();
-        popup_videoElement.currentTime = 0;
+        close_popup();
     }
 }
 window.addEventListener('keyup', (evt) =>{
     if((evt.key == 'Escape') && (popup_video.style.display == 'block')){
-        popup_video.style.display = 'none';
-        let popup_videoElement = popup_video.querySelector('video');
-        popup_videoElement.pause();
-        popup_videoElement.currentTime = 0;
+        close_popup();
     }
 })
