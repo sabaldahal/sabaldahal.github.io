@@ -69,3 +69,11 @@ popup_video.onclick = function(evt) {
         popup_videoElement.currentTime = 0;
     }
 }
+window.addEventListener('keyup', (evt) =>{
+    if((evt.key == 'Escape') && (popup_video.style.display == 'block')){
+        popup_video.style.display = 'none';
+        let popup_videoElement = popup_video.querySelector('video');
+        popup_videoElement.pause();
+        popup_videoElement.currentTime = 0;
+    }
+})
