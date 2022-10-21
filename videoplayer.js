@@ -29,7 +29,7 @@ document.querySelectorAll('.video-grid div').forEach(one => {
     div_video.onloadedmetadata = ()=>{
         div_span.innerHTML = time_string(div_video.duration);      
     }
-    
+    console.log('Err Test:');
     console.log(div_video.src,'bool', div_video.paused)
 
     one.addEventListener('mouseover', (eve)=>{
