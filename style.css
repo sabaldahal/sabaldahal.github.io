@@ -189,6 +189,10 @@ header {
     transform: scale(1.05);
     z-index: 7;
 }
+.video-grid video:hover{
+    z-index: 7;
+}
+
 .popup-video{
     position: fixed;
     top: 0;
