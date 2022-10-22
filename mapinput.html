@@ -31,18 +31,30 @@
                     <p>
                         Instructions:
                     </p>
-                    Begin by initializing the viewport of the map. (This is the first location that will be shown while displaying the map)
-                    <br>
-                    Next, choose a value for the zoom(0 being the farthest and 22 being the closest)
-                    <br>
-                    Add at least one marker. Enter the coordinate and that is where the marker will be placed.
-                    <br> 
-                    You can add as many markers as you like by clicking on 'Add Marker' button. 
-                    <br>
-                    Click Generate to see the map.
+                    <ul>
+                        <li>
+                            Set the initial viewport of the map (This will center the map at the given coordinate)
+                        </li>
+                        <li>
+                            Specify the zoom level for the map
+                        </li>
+                        <li>
+                            For each marker, add its coordinate (This will position the marker at the given coordinate)
+                        </li>
+                        <li>
+                            (Optional) Add Title and Description for each marker 
+                        </li>
+                        <li>
+                            Click <button disabled style="color:#fff;">Add Marker</button> to add the marker on the list
+                        </li>
+                        <li>Click <button disabled style="color:#fff;">Generate</button> to generate the dynamic map
+                        </li>
+                        
+                    </ul>
+                    
 
-                    <p>Notice that once you add a valid initial viewport's coordinate and a zoom value,
-                        you cannot make changes to them. Errors will be displayed on the screen.
+                    <p>Once you add a valid initial viewport's coordinate and a zoom value,
+                        you cannot change those values
                     </p>
                     <p>
                         Markers added will be displayed below:
