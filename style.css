@@ -37,6 +37,10 @@ header {
     color: rgb(42, 227, 156);
 }
 
+.navbar .socials a:hover{
+    color: rgb(204, 214, 246);
+}
+
 #mainVideo{
     position: fixed;
     top: 0;
