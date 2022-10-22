@@ -246,13 +246,35 @@ header {
 
 @media screen and (max-width: 1024px){
     .video-grid{
-        grid-auto-rows: 200px;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, auto);
+        grid-auto-rows: 50vh;
+        
+    }
+    .video-grid-row-2{
+        grid-row: span 1;
+    }
+    .video-grid-col-3{
+        grid-column: span 2;
     }
 }
 @media screen and (max-width: 768px){
     .popup-video video{
         width: 95%;
+    }
+}
+@media screen and (max-width: 640px){
+    .video-grid{
+        grid-template-columns: repeat(2, auto);
+        grid-auto-rows: 21vh;
+        
+    }
+    .video-grid-row-2{
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .video-grid-col-3{
+        grid-column: span 2;
     }
 }
 .form-full {
