@@ -388,16 +388,33 @@ footer {
     background: rgba(0,0,0,0.75);
     color: #fff;
     padding: 80px 20px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .mapnav::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+.mapnav::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(216, 216, 216); 
+    border-radius: 10px;
+}
+
+.mapnav::-webkit-scrollbar-thumb {
+    background: rgb(42, 227, 156); 
+    border-radius: 10px;
+  }
+.mapnav::-webkit-scrollbar-thumb:hover {
+    background: rgb(133, 133, 133); 
+  }
+/* .mapnav::-webkit-scrollbar {
     display: none;
 }
 
 .mapnav {
   -ms-overflow-style: none; 
   scrollbar-width: none; 
-}
+} */
 .codeBar{
     display: block;
     position: relative;
