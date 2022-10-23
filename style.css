@@ -160,7 +160,6 @@ header {
     object-fit: cover;
     border-radius: 40px;
     z-index:4;
-
     cursor: pointer;
     overflow: hidden;
 }
@@ -175,8 +174,9 @@ header {
 .video-grid span{
     position: absolute;
     bottom: 5%;
-    right: 4%;
+    right: 5%;
     color: rgb(42, 227, 156);
+    font-size: 12px;
     font-weight: bold;
     z-index: 10;
     padding: 10px 10px;
@@ -266,7 +266,8 @@ header {
     .video-grid{
         grid-template-columns: repeat(2, auto);
         grid-auto-rows: 21vh;
-        
+        padding: 42px 10px 10px;
+        gap: 10px;
     }
     .video-grid-row-2{
         grid-column: span 2;
@@ -275,6 +276,11 @@ header {
 
     .video-grid-col-3{
         grid-column: span 2;
+    }
+    .video-grid span{
+        padding: 5px 5px;
+        font-size: 8px;
+        right: 8%;
     }
 }
 .form-full {
