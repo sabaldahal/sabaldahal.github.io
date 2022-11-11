@@ -2,19 +2,19 @@ import { Gate } from './gate.js';
 import { Input } from './lgsinput.js';
 import { Wire } from './wire.js';
 import { InputBit } from './inputbit.js';
+import { OutputBit } from './outputbit.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth -6;
     canvas.height = window.innerHeight - 200;
-    console.log(canvas.height);
-    console.log(canvas.width);
     class Board {
         constructor(width, height) {
             this.width = width;
             this.height = height;
             this.inputBit = new InputBit(this);
+            this.outputBit = new OutputBit(this);
             this.allGate = [];
             this.gate1 = new Gate(this);
             this.gate1.width = 200;
@@ -25,6 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
             this.gate2.color = 'blue';
             this.gate2.x += 450;
             this.gate2.y += 200;
+            this.gate2.input = 1;
             this.gate2.update();
             this.gate2.name = 'Not';
             this.pinColor = '#ffffff';
@@ -50,11 +51,13 @@ window.addEventListener('DOMContentLoaded', () => {
         
         draw(context) {
             this.clear(context);
+            this.wires.draw(context);
             this.inputBit.draw(context);
+            this.outputBit.draw(context);
             for (let one of this.allGate) {
                 one.draw(context);
             }
-            this.wires.draw(context);
+
         }
     }
 
