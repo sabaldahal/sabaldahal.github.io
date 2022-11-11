@@ -1,10 +1,12 @@
 import { Gate } from './gate.js';
 import { Input } from './lgsinput.js';
 import { Wire } from './wire.js';
+import { InputBit } from './inputbit.js';
+
 window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 0.9 * window.innerWidth;
+    canvas.width = window.innerWidth -6;
     canvas.height = window.innerHeight - 200;
     console.log(canvas.height);
     console.log(canvas.width);
@@ -12,18 +14,20 @@ window.addEventListener('DOMContentLoaded', () => {
         constructor(width, height) {
             this.width = width;
             this.height = height;
+            this.inputBit = new InputBit(this);
             this.allGate = [];
             this.gate1 = new Gate(this);
+            this.gate1.width = 200;
+            this.gate1.update();
             this.gate2 = new Gate(this);
             this.gate1.text = 'Coming';
             this.gate2.text = 'Soon';
             this.gate2.color = 'blue';
             this.gate2.x += 450;
             this.gate2.y += 200;
-            this.gate2.input = 4;
-            this.gate2.output = 1;
             this.gate2.update();
             this.gate2.name = 'Not';
+            this.pinColor = '#ffffff';
             this.wires = new Wire(this);
             this.input = new Input(this);
             this.allGate.push(this.gate1);
@@ -43,9 +47,10 @@ window.addEventListener('DOMContentLoaded', () => {
             this.allGate.push(gate);
             this.draw(ctx)
         }
+        
         draw(context) {
-            //this.gate.draw(context, border_status);
-            this.clear(ctx);
+            this.clear(context);
+            this.inputBit.draw(context);
             for (let one of this.allGate) {
                 one.draw(context);
             }
@@ -54,24 +59,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     const game = new Board(canvas.width, canvas.height);
-    //temp
-    game.wires.allWires.push({
-        source : {
-            x : 0,
-            y : 0,
-            gate_index : 0,
-            io : 'out',
-            pin_index : 1
 
-        },
-        destination : {
-            x : 0,
-            y : 0,
-            gate_index : 1,
-            io : 'in',
-            pin_index : 0
-        }
-    })
     game.draw(ctx);
 
 
