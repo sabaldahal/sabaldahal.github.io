@@ -121,6 +121,7 @@ export class InputBit{
                     x : one.pinX,
                     y : one.pinY,
                     from_source : true,
+                    to_output : false,
                     pin_index : ix,
                     on : false
 
