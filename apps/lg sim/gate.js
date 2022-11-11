@@ -1,20 +1,21 @@
 export class Gate{
     //color on click
     click_color = '#787878';
+    pinColor = '#ffffff';
     static id = -1;
-    isIndex;
+    //isIndex; delete later
     //radius of io pins
     radius = 8.00;
     constructor(Board,x=0,y=0){
         this.board = Board;
         this.name = 'And';
         this.text = '';
-        this.input = 3;     //no. of input pins
-        this.output = 2;    //no. of ouput pins
+        this.input = 2;     //no. of input pins
+        this.output = 1;    //no. of ouput pins
         this.i = [];        //input pins, location
         this.o = [];        //output pins, location
-        this.width = 200;   //width of gate
-        this.height = 100;  //height of gate
+        this.width = 100;   //width of gate
+        this.height = 80;  //height of gate
         this.color = 'red'; //color of gate
         this.x = this.board.width/6;                  //this gate x location
         this.y = this.board.height/22;   //this gate y location
@@ -22,6 +23,41 @@ export class Gate{
         this.add_inputs();
         this.add_outputs();
         this.isIndex = ++Gate.id;
+        this.connectedWires = [];
+        this.outputCurrent = false;
+    }
+    // //algorithm
+    // //need to change this
+    // algo(){
+        
+    //     this.o[0].current = this.i[0].current && this.i[1].current;
+    // }
+    //update current
+    check_update_current(){
+        let visited_status = true;
+        let current_status = true;
+        let index = 0;
+        let indexOfOut = null;
+        //check status in each of the connected wire
+        for(let one of this.connectedWires){
+            if(one.isAt == 'in'){
+                visited_status = visited_status && this.board.wires.allWires[one.wireIndex].visited;
+                current_status = current_status && this.board.wires.allWires[one.wireIndex].on;
+            }else{
+                indexOfOut = index;
+            }
+            index++;
+        }
+        //if both wires are visited then calculate the ouptut;
+        if(visited_status){
+            this.outputCurrent = current_status;
+            if(indexOfOut){
+                this.board.wires.allWires[this.connectedWires[indexOfOut].wireIndex].on = this.outputCurrent;
+                this.board.wires.allWires[this.connectedWires[indexOfOut].wireIndex].visited = true;
+            }
+            return true;
+        }
+        return false;
     }
     //initialize the position of inputs
     add_inputs(){
@@ -30,7 +66,8 @@ export class Gate{
             displace += ((1/(this.input+1))*this.height);
             this.i.push({
                 x: this.x,
-                y: this.y + displace
+                y: this.y + displace,
+                current : false
             })
         }
     }
@@ -41,7 +78,8 @@ export class Gate{
             displace += ((1/(this.output+1))*this.height);
             this.o.push({
                 x: this.x + this.width,
-                y: this.y + displace
+                y: this.y + displace,
+                current: false
             })
         }
     }
@@ -49,30 +87,36 @@ export class Gate{
     //check if mouse is over pins
     is_mouse_on_pin(mouseX,mouseY){
         let ix = 0;
+        //checking on input pins
         for(let one of this.i){
             let distance = Math.sqrt(((mouseX-one.x)**2) + ((mouseY-one.y)**2));
             if(distance < this.radius){
                 return {
                     x : one.x,
                     y : one.y,
+                    from_source: false,
                     gate_index : this.isIndex,
                     io : 'in',
-                    pin_index : ix
+                    pin_index : ix,
+                    on : false
 
                 };
             }
             ix++
         }
         ix=0;
+        //checking on output pins
         for(let one of this.o){
             let distance = Math.sqrt(((mouseX-one.x)**2) + ((mouseY-one.y)**2));
             if(distance < this.radius){
                 return {
                     x : one.x,
                     y : one.y,
+                    from_source : false,
                     gate_index : this.isIndex,
                     io : 'out',
-                    pin_index : ix
+                    pin_index : ix,
+                    on : false
                 };
             }
             ix++;
@@ -115,8 +159,7 @@ export class Gate{
     //draw the input pins
     input_bit(context){
         let circle = new Path2D();
-        context.fillStyle = 'white';
-        let displace = 0;
+        context.fillStyle = this.pinColor;
         this.i.forEach(one => {
             circle.arc(one.x, one.y, this.radius, 0, 2 * Math.PI); 
             context.fill(circle);
@@ -125,8 +168,7 @@ export class Gate{
     //draw the ouput pins
     output_bit(context){
         let circle = new Path2D();
-        context.fillStyle = 'white';
-        let displace = 0;
+        context.fillStyle = this.pinColor;
         this.o.forEach(one => {
             circle.arc(one.x, one.y, this.radius, 0, 2 * Math.PI); 
             context.fill(circle);
@@ -146,7 +188,7 @@ export class Gate{
         this.y += cy;
         this.update_pins();
     }
-    //change the status of the current gate when clicked or unclicked
+    //change the status of the current gate
     status(context){
         this.checkBoundary();
         context.fillStyle = this.color;
@@ -158,6 +200,7 @@ export class Gate{
         this.output_bit(context);
     }
     draw(context){
+        //add border to active gate
         if(this.hasBorder){
             this.checkBoundary();
             //adding stroke on click
