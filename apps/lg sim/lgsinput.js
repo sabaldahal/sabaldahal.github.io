@@ -9,6 +9,9 @@ export class Input{
         this.index = null; //drag gate at index
         this.wireIndex = null; //update position of wire relative to gate index
         this.drag = false;
+        this.drag_source = false; //allow the source to be dragged
+        this.drag_source_index = null; //capture the source index to drag
+        this.s_is_dragging = false; //check if the source is being dragged
         this.paint = false;
         this.branch = false;
         this.hasHead = false; //check if wire is already attached to one gate
@@ -76,6 +79,7 @@ export class Input{
         //check if mouse is clicked on a pin
         const pins = (e)=>{
             let onPin;
+            //checking if the mouse is on Gates
             for(let one of this.board.allGate){
                 onPin = one.is_mouse_on_pin(e.offsetX,e.offsetY);
                 if(onPin){
@@ -86,6 +90,16 @@ export class Input{
                     break;
                 }
             }
+            if(!onPin){
+                //checking if the mouse is on input
+                onPin = this.board.inputBit.is_mouse_on_pin(e.offsetX, e.offsetY)
+                if(onPin){
+                    this.drag = false;
+                    this.paint = true;
+                    this.hasHead = true;
+                    this.fromPin = onPin;
+                }
+            }
             draw_wires();
         }
         //stop drawing wire
@@ -93,10 +107,11 @@ export class Input{
             this.paint = false;
             this.hasHead =false;
         }
+        //set the styling of the wire
         const stroke_wire =()=>{
-            this.cntx.lineWidth = 10;
+            this.cntx.lineWidth = 5;
             this.cntx.lineCap = 'round';
-            this.cntx.strokeStyle = 'grey';
+            this.cntx.strokeStyle = '#000000';
             this.cntx.beginPath();
             this.cntx.moveTo(this.fromPin.x, this.fromPin.y);
             this.cntx.lineTo(this.currMouseX, this.currMouseY);
@@ -111,13 +126,19 @@ export class Input{
             this.paintHead = false;
     
         }
+        //terminate or branch wire
         const add_branch =(e)=>{
             let onPin;
+            //checking on the pins of all the Gates
             for(let one of this.board.allGate){
                 onPin = one.is_mouse_on_pin(e.offsetX,e.offsetY);
                 if(onPin){
                     break;
                 }
+            }
+            //checking on the input Bit
+            if(!onPin){
+                onPin = this.board.inputBit.is_mouse_on_pin(e.offsetX, e.offsetY);            
             }
             if(!onPin){
                 this.paint = false;
@@ -127,42 +148,88 @@ export class Input{
                 //terminate here
                 let val = {
                     source : this.fromPin,
-                    destination : onPin
+                    destination : onPin,
+                    on : false, //need to update this
+                    visited : false
                 }
                 this.board.wires.addToPin(val);
+                this.board.wires.update_array();
                 this.hasHead = false;
             }
             this.drag = false;
             this.paint = false;          
             draw_wires();
         }
-        const add_branch2 =(e)=>{
-            let onPin;
-            for(let one of this.board.allGate){
-                onPin = one.is_mouse_on_pin(e.offsetX,e.offsetY);
-                if(onPin){
-                    break;
-                }
-            }
-            if(onPin){
-                //terminate here
-                let val = {
-                    source : this.fromPin,
-                    destination : onPin
-                }
-                this.board.wires.addToPin(val);
-                this.hasHead = false;
-            }         
-            draw_wires();
-        }
+        // const add_branch2 =(e)=>{
+        //     let onPin;
+        //     for(let one of this.board.allGate){
+        //         onPin = one.is_mouse_on_pin(e.offsetX,e.offsetY);
+        //         if(onPin){
+        //             break;
+        //         }
+        //     }
+        //     if(onPin){
+        //         //terminate here
+        //         let val = {
+        //             source : this.fromPin,
+        //             destination : onPin
+        //         }
+        //         this.board.wires.addToPin(val);
+        //         this.hasHead = false;
+        //     }         
+        //     draw_wires();
+        // }
 
+        //toggle the source bit on or off
+        const toggle_source = (e)=>{
+            if(this.s_is_dragging) return;
+            this.board.inputBit.is_mouse_on_bit(e.offsetX, e.offsetY);
+            this.s_is_dragging = false;
+        }
+        //check if the mouse is on the source bit
+        const toggle_source_drag = (e)=>{
+            let check = this.board.inputBit.allow_toggle(e.offsetX, e.offsetY)
+            if(check.isOver){
+                this.drag_source = true;
+                this.startX = parseInt(e.offsetX);
+                this.startY = parseInt(e.offsetY);
+                this.drag_source_index = check.index;
+            }
+        }
+        //move the source bit on the y axis
+        const move_source = (e) =>{
+            if(!this.drag_source) return;
+            else{
+                let mouseX = parseInt(e.offsetX);
+                let mouseY = parseInt(e.offsetY);
+                let dy = mouseY - this.startY;
+                this.board.inputBit.bit[this.drag_source_index].y += dy;
+                this.board.inputBit.bit[this.drag_source_index].pinY += dy;
+                this.s_is_dragging = true;
+                this.startX = mouseX;
+                this.startY = mouseY;
+            }
+            this.board.draw(this.cntx);
+        }
+        //add a source bit
+        const add_source = (e) =>{
+
+            let check = this.board.inputBit.is_on_source(e.offsetX, e.offsetY);
+            if(check && this.board.inputBit.temp_bit != {}){
+                this.board.inputBit.bit.push(this.board.inputBit.temp_bit);
+            }
+            this.board.draw(this.cntx);
+        }
         canvas.onmousedown = (e)=>{
-            gate_rect_check(e);
+            gate_rect_check(e); //check if mouse is clicked on any of the gates
+            toggle_source_drag(e); //check if mouse is clicked on any of the source bits
+            add_source(e); //add a source bit
             if(e.button == 0){ 
                 if(this.hasHead){
-                    add_branch(e);
+                    //work in progress, for now see comment
+                    add_branch(e); //terminates wire
                 }else{
-                    pins(e);
+                    pins(e); //start drawing wire
                 }
             }
             else if(e.button == 2) stop_draw_wire();
@@ -171,32 +238,24 @@ export class Input{
             this.currMouseX = e.offsetX;
             this.currMouseY = e.offsetY;
             moveGate(e);
+            move_source(e);
             draw_wires();
+            //add a temp source when mouse is over the source panel
+            this.board.inputBit.is_mouse_on(e.offsetX, e.offsetY, this.cntx);
         }
         canvas.onmouseup = (e)=>{
+            this.drag_source = false;
             m_drag_false(e);
+            toggle_source(e);
             draw_wires();
+            //turn off dragging status
+            this.s_is_dragging = false; //place this after toggle_source(e)
         }
         canvas.onmouseout = (e)=>{
             m_drag_false(e);
         }
  
-        
 
-
-        //old
-        window.addEventListener('keydown', (e)=>{
-            if((e.key == 'ArrowUp' || e.key == 'ArrowRight')
-            && this.keys.indexOf(e.key) == -1 ){
-                this.keys.push(e.key);
-            }
-        });
-        window.addEventListener('keyup', (e)=>{
-            if(e.key == 'ArrowUp' 
-            || e.key == 'ArrowRight'){
-                this.keys.splice(this.keys.indexOf(e.key),1);
-            }
-        });
 
     }
     draw(context){
