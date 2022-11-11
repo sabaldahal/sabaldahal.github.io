@@ -64,7 +64,14 @@ export class Wire {
                     destination : wire.source,
                     on : wire.on
                 }
-            }else{
+            }else if(wire.source.to_output){
+                return{
+                    source : wire.destination,
+                    destination : wire.source,
+                    on : wire.on
+                }
+            }
+            else{
                 return wire;
             }
         })
@@ -80,31 +87,52 @@ export class Wire {
         let atIdx;
         for(let wire of this.allWires){
             if(wire.source.from_source){
-                atIdx = wire.destination.gate_index;
-                this.board.allGate[atIdx].connectedWires.push({
-                    isAt : wire.destination.io,
-                    wireIndex : index
-                })
-                
-                //change this
+                //save wire info in the source bit
                 this.board.inputBit.connectedWire.push({
                     wireIndex : index,
                     pin_index : wire.source.pin_index
-                });               
-                this.allGateIndices.push(wire.destination.gate_index);
+                });
+                if(!wire.destination.to_output){
+                    //if another end is gate save the wire info at the gate
+                    atIdx = wire.destination.gate_index;
+                    this.board.allGate[atIdx].connectedWires.push({
+                        isAt : wire.destination.io,
+                        wireIndex : index
+                    })             
+                    this.allGateIndices.push(wire.destination.gate_index);
+                }else{
+                    //if the other end is output save the wire info at output
+                    this.board.outputBit.connectedWire.push({
+                        wireIndex : index,
+                        pin_index : wire.destination.pin_index
+                    });
+                }
+
             }else{
+                if(wire.destination.to_output){
+                    //if the destination is output
+                    this.board.outputBit.connectedWire.push({
+                        wireIndex : index,
+                        pin_index : wire.destination.pin_index
+                    });
+
+                }else{
+                    //saving wire info at the other gate
+                    atIdx = wire.destination.gate_index;
+                    this.board.allGate[atIdx].connectedWires.push({
+                        isAt : wire.destination.io,
+                        wireIndex : index
+                    })
+                    this.allGateIndices.push(wire.destination.gate_index);
+                }
+                //saving wire info at one of the other gates
                 atIdx = wire.source.gate_index;
                 this.board.allGate[atIdx].connectedWires.push({
                     isAt : wire.source.io,
                     wireIndex : index
                 })
-                atIdx = wire.destination.gate_index;
-                this.board.allGate[atIdx].connectedWires.push({
-                    isAt : wire.destination.io,
-                    wireIndex : index
-                })
+
                 this.allGateIndices.push(wire.source.gate_index);
-                this.allGateIndices.push(wire.destination.gate_index);
             }
             index++;
         }
@@ -112,7 +140,7 @@ export class Wire {
     }
 
     calculate_signal(){
-        // debugger;
+        // if(this.allWires.length > 3)         debugger;
         let i = 0;
         let totalGateVisited = 0;
         //read the current in wires attached to the source
@@ -141,6 +169,16 @@ export class Wire {
                 }  
             }
         }
+        for(let wire of this.allWires){
+            if(wire.destination.to_output){
+                if(wire.source.from_source){
+                    this.board.outputBit.toggle_bit(wire.destination.pin_index, wire.on);
+                }else{
+                    wire.on = this.board.allGate[wire.source.gate_index].outputCurrent;
+                    this.board.outputBit.toggle_bit(wire.destination.pin_index, wire.on);
+                }
+            }
+        }
     }
     draw(context) {
         this.calculate_signal();
@@ -153,13 +191,17 @@ export class Wire {
             if(wire.source.from_source){
                 posS = this.board.inputBit.pass_pin_position(wire.source.pin_index);
             }else{
-                posS = this.board.allGate[wire.source.gate_index].pass_pin_position(wire.source.io, wire.source.pin_index);                
+                if(wire.source.to_output){
+                    posS = this.board.outputBit.pass_pin_position(wire.source.pin_index);
+                }else posS = this.board.allGate[wire.source.gate_index].pass_pin_position(wire.source.io, wire.source.pin_index);                
             }
             if(wire.destination.from_source){
                 posD = this.board.inputBit.pass_pin_position(wire.destination.pin_index);
             }
             else{
-                posD = this.board.allGate[wire.destination.gate_index].pass_pin_position(wire.destination.io, wire.destination.pin_index);        
+                if(wire.destination.to_output){
+                    posD = this.board.outputBit.pass_pin_position(wire.destination.pin_index);
+                }else posD = this.board.allGate[wire.destination.gate_index].pass_pin_position(wire.destination.io, wire.destination.pin_index);      
             }
             context.strokeStyle = this.find_color(wire.on);
             context.beginPath();
