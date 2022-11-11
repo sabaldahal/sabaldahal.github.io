@@ -38,16 +38,22 @@ export class Gate{
         let current_status = true;
         let index = 0;
         let indexOfOut = null;
+        let in_count= 0; //counting the number of input pins
+
         //check status in each of the connected wire
         for(let one of this.connectedWires){
             if(one.isAt == 'in'){
                 visited_status = visited_status && this.board.wires.allWires[one.wireIndex].visited;
                 current_status = current_status && this.board.wires.allWires[one.wireIndex].on;
+                in_count++;
             }else{
                 indexOfOut = index;
             }
             index++;
         }
+        if(in_count != this.input) current_status = false;
+        //implementation for the not gate;
+        if(this.input == 1) current_status = !current_status;
         //if both wires are visited then calculate the ouptut;
         if(visited_status){
             this.outputCurrent = current_status;
@@ -95,6 +101,7 @@ export class Gate{
                     x : one.x,
                     y : one.y,
                     from_source: false,
+                    to_output : false,
                     gate_index : this.isIndex,
                     io : 'in',
                     pin_index : ix,
@@ -113,6 +120,7 @@ export class Gate{
                     x : one.x,
                     y : one.y,
                     from_source : false,
+                    to_output : false,
                     gate_index : this.isIndex,
                     io : 'out',
                     pin_index : ix,
