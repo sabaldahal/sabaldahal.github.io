@@ -10,7 +10,9 @@ export class Input{
         this.wireIndex = null; //update position of wire relative to gate index
         this.drag = false;
         this.drag_source = false; //allow the source to be dragged
+        this.drag_output = false; //allow the ouput to be dragged
         this.drag_source_index = null; //capture the source index to drag
+        this.drag_output_index = null; //capture the output index to drag
         this.s_is_dragging = false; //check if the source is being dragged
         this.paint = false;
         this.branch = false;
@@ -100,6 +102,17 @@ export class Input{
                     this.fromPin = onPin;
                 }
             }
+            if(!onPin){
+                //checking if the mouse is on output
+                onPin = this.board.outputBit.is_mouse_on_pin(e.offsetX, e.offsetY)
+                if(onPin){
+                    this.drag = false;
+                    this.paint = true;
+                    this.hasHead = true;
+                    this.fromPin = onPin;
+                }
+            }
+
             draw_wires();
         }
         //stop drawing wire
@@ -139,6 +152,10 @@ export class Input{
             //checking on the input Bit
             if(!onPin){
                 onPin = this.board.inputBit.is_mouse_on_pin(e.offsetX, e.offsetY);            
+            }
+            //checking on the output bits
+            if(!onPin){
+                onPin = this.board.outputBit.is_mouse_on_pin(e.offsetX, e.offsetY);            
             }
             if(!onPin){
                 this.paint = false;
@@ -196,6 +213,16 @@ export class Input{
                 this.drag_source_index = check.index;
             }
         }
+        //check if the mouse is on the output bit
+        const toggle_output_drag = (e)=>{
+            let check = this.board.outputBit.allow_toggle(e.offsetX, e.offsetY)
+            if(check.isOver){
+                this.drag_output = true;
+                this.startX = parseInt(e.offsetX);
+                this.startY = parseInt(e.offsetY);
+                this.drag_output_index = check.index;
+            }
+        }
         //move the source bit on the y axis
         const move_source = (e) =>{
             if(!this.drag_source) return;
@@ -211,6 +238,20 @@ export class Input{
             }
             this.board.draw(this.cntx);
         }
+        //move the ouput bit on the y axis
+        const move_output = (e) =>{
+            if(!this.drag_output) return;
+            else{
+                let mouseX = parseInt(e.offsetX);
+                let mouseY = parseInt(e.offsetY);
+                let dy = mouseY - this.startY;
+                this.board.outputBit.bit[this.drag_output_index].y += dy;
+                this.board.outputBit.bit[this.drag_output_index].pinY += dy;
+                this.startX = mouseX;
+                this.startY = mouseY;
+            }
+            this.board.draw(this.cntx);
+        }
         //add a source bit
         const add_source = (e) =>{
 
@@ -220,10 +261,20 @@ export class Input{
             }
             this.board.draw(this.cntx);
         }
+        //add a output bit
+        const add_output = (e) =>{
+            let check = this.board.outputBit.is_on_source(e.offsetX, e.offsetY);
+            if(check && this.board.outputBit.temp_bit != {}){
+                this.board.outputBit.bit.push(this.board.outputBit.temp_bit);
+            }
+            this.board.draw(this.cntx);
+        }
         canvas.onmousedown = (e)=>{
             gate_rect_check(e); //check if mouse is clicked on any of the gates
             toggle_source_drag(e); //check if mouse is clicked on any of the source bits
+            toggle_output_drag(e); //check if mouse is clicked on any of the output bits
             add_source(e); //add a source bit
+            add_output(e); //add a output bit
             if(e.button == 0){ 
                 if(this.hasHead){
                     //work in progress, for now see comment
@@ -238,13 +289,16 @@ export class Input{
             this.currMouseX = e.offsetX;
             this.currMouseY = e.offsetY;
             moveGate(e);
-            move_source(e);
+            move_source(e); //move source bit
+            move_output(e); //move output bit
             draw_wires();
             //add a temp source when mouse is over the source panel
             this.board.inputBit.is_mouse_on(e.offsetX, e.offsetY, this.cntx);
+            this.board.outputBit.is_mouse_on(e.offsetX, e.offsetY, this.cntx);
         }
         canvas.onmouseup = (e)=>{
             this.drag_source = false;
+            this.drag_output = false;
             m_drag_false(e);
             toggle_source(e);
             draw_wires();
