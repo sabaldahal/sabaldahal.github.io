@@ -269,12 +269,18 @@ export class Input{
             }
             this.board.draw(this.cntx);
         }
+        //add gate
+        const bottom_add = (e)=>{
+            this.board.bottom.is_mouse_on(e.offsetX, e.offsetY);
+
+        }
         canvas.onmousedown = (e)=>{
             gate_rect_check(e); //check if mouse is clicked on any of the gates
             toggle_source_drag(e); //check if mouse is clicked on any of the source bits
             toggle_output_drag(e); //check if mouse is clicked on any of the output bits
             add_source(e); //add a source bit
             add_output(e); //add a output bit
+            bottom_add(e); //add a gate
             if(e.button == 0){ 
                 if(this.hasHead){
                     //work in progress, for now see comment
