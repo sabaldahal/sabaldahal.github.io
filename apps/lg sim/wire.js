@@ -7,6 +7,8 @@ export class Wire {
         this.out = [];
         this.allWires = [];
         this.allGateIndices = [];
+        this.errCheck = 0;
+        this.errGateIndex = [];
     }
     addToPin(val){
         this.allWires.push(val);
@@ -83,6 +85,8 @@ export class Wire {
         this.board.allGate.forEach((gate)=>{
             gate.connectedWires = [];
         })
+        this.board.inputBit.connectedWire = [];
+        this.board.outputBit.connectedWire = [];
         let index = 0;
         let atIdx;
         for(let wire of this.allWires){
@@ -140,11 +144,16 @@ export class Wire {
     }
 
     calculate_signal(){
-        // if(this.allWires.length > 3)         debugger;
+        //if(this.allWires.length == 6 && this.allWires[5].on) debugger;
         let i = 0;
         let totalGateVisited = 0;
         //read the current in wires attached to the source
-        //mark wires as visited
+        // mark wires as visited
+        for(let wire of this.allWires){
+            wire.visited = false;
+            wire.on = false;
+        }
+        //visit the wires connected to the source
         for(let wire of this.allWires){
             if(wire.source.from_source){
                 //write to wire
@@ -162,13 +171,15 @@ export class Wire {
         let allIndices = [...new Set(this.allGateIndices)];
         while(totalGateVisited < this.allGateIndices.length){
             let val;
-            for(let one of this.allGateIndices){
+            for(let one of allIndices){
                 val = this.board.allGate[one].check_update_current();
                 if(val){
                     totalGateVisited++;
+                    allIndices = allIndices.filter((e)=> e!== one);
                 }  
             }
         }
+
         for(let wire of this.allWires){
             if(wire.destination.to_output){
                 if(wire.source.from_source){
@@ -179,9 +190,10 @@ export class Wire {
                 }
             }
         }
+        this.errCheck = 0;
+        this.errGateIndex = [];
     }
     draw(context) {
-        this.calculate_signal();
         context.lineWidth = 7;
         context.lineCap = 'round';
         this.allWires.forEach((wire)=>{
