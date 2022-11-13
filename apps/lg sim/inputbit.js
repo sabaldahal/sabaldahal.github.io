@@ -6,7 +6,7 @@ export class InputBit{
     small_radius = 8;
     constructor(board){
         this.board = board;
-        this.height = this.board.height;
+        this.height = this.board.height - this.board.bottom.height;
         this.width = 0.05 * this.board.width;
         this.transparency = 0.8;
         this.x = 0;
@@ -109,6 +109,7 @@ export class InputBit{
     is_mouse_on_bit(mouseX, mouseY){
         let check = this.allow_toggle(mouseX, mouseY)
         if(check.isOver) this.bit[check.index].on = !this.bit[check.index].on;
+        //if(this.bit[check.index].on) debugger;
 
     }
     //check if the mouse is on source pin
