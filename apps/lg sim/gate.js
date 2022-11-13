@@ -6,8 +6,8 @@ export class Gate{
     //isIndex; delete later
     //radius of io pins
     radius = 8.00;
-    constructor(Board,x=0,y=0){
-        this.board = Board;
+    constructor(board,x=0,y=0){
+        this.board = board;
         this.name = 'And';
         this.text = '';
         this.input = 2;     //no. of input pins
@@ -15,7 +15,7 @@ export class Gate{
         this.i = [];        //input pins, location
         this.o = [];        //output pins, location
         this.width = 100;   //width of gate
-        this.height = 80;  //height of gate
+        this.height = 60;  //height of gate
         this.color = 'red'; //color of gate
         this.x = this.board.width/6;                  //this gate x location
         this.y = this.board.height/22;   //this gate y location
@@ -57,7 +57,7 @@ export class Gate{
         //if both wires are visited then calculate the ouptut;
         if(visited_status){
             this.outputCurrent = current_status;
-            if(indexOfOut){
+            if(indexOfOut != null){
                 this.board.wires.allWires[this.connectedWires[indexOfOut].wireIndex].on = this.outputCurrent;
                 this.board.wires.allWires[this.connectedWires[indexOfOut].wireIndex].visited = true;
             }
