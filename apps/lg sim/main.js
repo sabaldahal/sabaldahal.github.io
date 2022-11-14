@@ -4,6 +4,7 @@ import { Wire } from './wire.js';
 import { InputBit } from './inputbit.js';
 import { OutputBit } from './outputbit.js';
 import { Bottom } from './bottompanel.js';
+import { Menu } from './menu.js';
 
 window.addEventListener('DOMContentLoaded', () => {
     const canvas = document.querySelector('#canvas');
@@ -24,7 +25,7 @@ window.addEventListener('DOMContentLoaded', () => {
             this.gate2 = new Gate(this);
             this.gate1.text = 'AND';
             this.gate2.text = 'NOT';
-            this.gate2.color = 'blue';
+            this.gate2.color = '#DBBBF5';
             this.gate2.x += 450;
             this.gate2.y += 200;
             this.gate2.input = 1;
@@ -33,6 +34,7 @@ window.addEventListener('DOMContentLoaded', () => {
             this.pinColor = '#ffffff';
             this.wires = new Wire(this);
             this.input = new Input(this);
+            this.menu = new Menu(this); //deleting gates, wires, and bits
             this.allGate.push(this.gate1);
             this.allGate.push(this.gate2);
 
