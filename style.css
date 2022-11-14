@@ -1,7 +1,10 @@
 *{
     box-sizing:border-box;
 }
-
+:root{
+    --x: 0.5;
+    --y: 0.5;
+}
 
 html, body{
     scroll-behavior: smooth;
@@ -582,7 +585,29 @@ footer {
     color: black;
 
 }
+.banner2{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: #153243;
+    background-size: cover;
+    background-position: center;
 
+}
+#returnHome{
+    position: fixed;
+    padding: 10px 10px;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    z-index: 99;
+    color: rgb(42, 227, 156);
+    cursor: pointer;
+}
+#returnHome i{
+    margin-right: 10px;
+    font-size: 30px;
+}
 #canvas {
     border: 2px solid #525252;
     position: fixed;
@@ -591,6 +616,36 @@ footer {
     transform: translate(-50%, -50%);
     z-index: 4;
 
+}
+#canvas-popup{
+    position: absolute;
+    width: 150px;
+	height: auto;
+    background: #1d706b;
+    color: white;
+    font-size: 18px;
+	transform: translate(-50%, -50%);
+    transition: transform 0.2s;
+    cursor: pointer;
+    z-index: 99;
+    display: none;
+    border-radius: 12px;
+}
+#canvas-popup ul{
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+#canvas-popup li{
+    padding: 10px 0px;
+}
+#canvas-popup li i{
+    margin-right : 12px;
+}
+#canvas-popup li:hover{
+    background: #185e59;
+    border-radius: 12px;
 }
 @media screen and (min-width: 900px) {
     .form-full{
