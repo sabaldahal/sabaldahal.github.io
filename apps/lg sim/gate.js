@@ -17,8 +17,8 @@ export class Gate{
         this.height = 50;  //height of gate
         this.color = '#C7DBE6'; //color of gate
         this.textColor = '#000000';
-        this.x = this.board.width/6;                  //this gate x location
-        this.y = this.board.height/22;   //this gate y location
+        this.x = this.board.width/2.4;                  //this gate x location
+        this.y = this.board.height/2.4;   //this gate y location
         this.hasBorder = false;
         this.add_inputs();
         this.add_outputs();
