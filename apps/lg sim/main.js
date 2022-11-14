@@ -5,8 +5,12 @@ import { InputBit } from './inputbit.js';
 import { OutputBit } from './outputbit.js';
 import { Bottom } from './bottompanel.js';
 import { Menu } from './menu.js';
+import { startAnimation } from './startlogo.js';
+import { mainMenu } from './mainmenu.js';
+
 
 window.addEventListener('DOMContentLoaded', () => {
+    startAnimation();
     const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth -6;
