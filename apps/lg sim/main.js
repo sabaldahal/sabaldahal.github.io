@@ -17,7 +17,21 @@ window.addEventListener('DOMContentLoaded', () => {
             this.height = height;
             this.bottom = new Bottom(this);
             this.inputBit = new InputBit(this);
+            this.inputBit.bit.push({
+                x : this.inputBit.width,
+                y : this.height/2.2,
+                pinX : this.inputBit.width + 30,
+                pinY : this.height/2.2,
+                on : false
+            })
             this.outputBit = new OutputBit(this);
+            this.outputBit.bit.push({
+                x : this.outputBit.x,
+                y : this.height/2.2,
+                pinX : this.outputBit.x - 30,
+                pinY : this.height/2.2,
+                on : false
+            })
             this.allGate = [];
             this.gate1 = new Gate(this);
             //this.gate1.width = 200;
@@ -26,8 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
             this.gate1.text = 'AND';
             this.gate2.text = 'NOT';
             this.gate2.color = '#DBBBF5';
-            this.gate2.x += 450;
-            this.gate2.y += 200;
+            this.gate2.x += 150;
             this.gate2.input = 1;
             this.gate2.update();
             this.gate2.name = 'Not';
