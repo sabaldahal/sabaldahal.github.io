@@ -15,7 +15,7 @@ export class Menu{
 
         //interactive methods
         menuholder.onclick = (e)=>{
-            alert('This Functionality will cause the program to crash; New update will fix this error');
+            alert('This Functionality will cause the program to crash! The Error will be addressed in the next update');
             let idx = this.board.allGate.findIndex((gate)=>gate.isIndex == this.activeGate);
             this.board.allGate.splice(idx,1);
             menuholder.style.display = 'none';
