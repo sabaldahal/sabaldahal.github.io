@@ -281,6 +281,7 @@ export class Input{
             add_source(e); //add a source bit
             add_output(e); //add a output bit
             bottom_add(e); //add a gate
+            this.board.menu.gate_menu(e); //gate menu
             if(e.button == 0){ 
                 if(this.hasHead){
                     //work in progress, for now see comment
@@ -289,7 +290,9 @@ export class Input{
                     pins(e); //start drawing wire
                 }
             }
-            else if(e.button == 2) stop_draw_wire();
+            else if(e.button == 2) {
+                stop_draw_wire();
+            }
         }
         canvas.onmousemove = (e)=>{
             this.currMouseX = e.offsetX;
