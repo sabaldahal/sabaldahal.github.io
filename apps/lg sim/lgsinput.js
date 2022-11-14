@@ -317,7 +317,48 @@ export class Input{
         canvas.onmouseout = (e)=>{
             m_drag_false(e);
         }
- 
+        
+        //for mobile devices
+        canvas.ontouchstart = (e)=>{
+            gate_rect_check(e); //check if mouse is clicked on any of the gates
+            toggle_source_drag(e); //check if mouse is clicked on any of the source bits
+            toggle_output_drag(e); //check if mouse is clicked on any of the output bits
+            add_source(e); //add a source bit
+            add_output(e); //add a output bit
+            bottom_add(e); //add a gate
+            this.board.menu.gate_menu(e); //gate menu
+            if(e.button == 0){ 
+                if(this.hasHead){
+                    //work in progress, for now see comment
+                    add_branch(e); //terminates wire
+                }else{
+                    pins(e); //start drawing wire
+                }
+            }
+            else if(e.button == 2) {
+                stop_draw_wire();
+            }
+        }
+        canvas.ontouchmove = (e)=>{
+            this.currMouseX = e.offsetX;
+            this.currMouseY = e.offsetY;
+            moveGate(e);
+            move_source(e); //move source bit
+            move_output(e); //move output bit
+            draw_wires();
+            //add a temp source when mouse is over the source panel
+            this.board.inputBit.is_mouse_on(e.offsetX, e.offsetY, this.cntx);
+            this.board.outputBit.is_mouse_on(e.offsetX, e.offsetY, this.cntx);
+        }
+        canvas.ontouchend = (e)=>{
+            this.drag_source = false;
+            this.drag_output = false;
+            m_drag_false(e);
+            toggle_source(e);
+            draw_wires();
+            //turn off dragging status
+            this.s_is_dragging = false; //place this after toggle_source(e)
+        }
 
 
     }
