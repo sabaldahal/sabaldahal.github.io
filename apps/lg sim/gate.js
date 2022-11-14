@@ -1,11 +1,10 @@
 export class Gate{
-    //color on click
+    //color on click, border color
     click_color = '#787878';
     pinColor = '#ffffff';
     static id = -1;
-    //isIndex; delete later
     //radius of io pins
-    radius = 8.00;
+    radius = 7.00;
     constructor(board,x=0,y=0){
         this.board = board;
         this.name = 'And';
@@ -14,9 +13,10 @@ export class Gate{
         this.output = 1;    //no. of ouput pins
         this.i = [];        //input pins, location
         this.o = [];        //output pins, location
-        this.width = 100;   //width of gate
-        this.height = 60;  //height of gate
-        this.color = 'red'; //color of gate
+        this.width = 80;   //width of gate
+        this.height = 50;  //height of gate
+        this.color = '#C7DBE6'; //color of gate
+        this.textColor = '#000000';
         this.x = this.board.width/6;                  //this gate x location
         this.y = this.board.height/22;   //this gate y location
         this.hasBorder = false;
@@ -201,9 +201,9 @@ export class Gate{
         this.checkBoundary();
         context.fillStyle = this.color;
         context.fillRect(this.x, this.y,this.width,this.height);
-        context.fillStyle = '#2ae39c';
-        context.font = "30px Arial";
-        context.fillText(this.text, this.x+this.width/5, this.y+this.height/2)
+        context.fillStyle = this.textColor;
+        context.font = "20px Arial";
+        context.fillText(this.text, this.x+this.width/4, this.y+this.height/1.6, this.width)
         this.input_bit(context);
         this.output_bit(context);
     }
