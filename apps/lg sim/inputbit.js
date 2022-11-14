@@ -1,9 +1,9 @@
 export class InputBit{
-    bg_color = '#97ab8d';
+    bg_color = '#284B63';
     off_color = '#525252';
     on_color = 'red';
     big_radius = 15;
-    small_radius = 8;
+    small_radius = 7.0;
     constructor(board){
         this.board = board;
         this.height = this.board.height - this.board.bottom.height;
