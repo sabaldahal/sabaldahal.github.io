@@ -594,13 +594,39 @@ footer {
     background-position: center;
 
 }
+#startlogo{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: block;
+    background: #19241D;
+    z-index: 99;
+}
+#startlogo .holder{
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color : #8F94A3;
+    transition: all linear .9s;
+    opacity: 1;
+    display: none;
+}
+#startlogo .holder h1{
+    font-size: 30px;
+}
+#startlogo .holder span{
+    color: #F3EFF5;
+}
 #returnHome{
     position: fixed;
     padding: 10px 10px;
     bottom: 0%;
     left: 50%;
     transform: translate(-50%, 0%);
-    z-index: 99;
+    z-index: 97;
     color: rgb(42, 227, 156);
     cursor: pointer;
 }
