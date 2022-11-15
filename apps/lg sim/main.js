@@ -4,11 +4,14 @@ import { instructions } from './instructions.js';
 
 
 const canvas = document.querySelector('#canvas');
+const lgswrapper = document.querySelector('#lgswrapper');
+const ret_menu = document.querySelector('#returnMainMenu');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth -6;
 canvas.height = window.innerHeight - 6;
 
 const startGame = ()=>{
+    lgswrapper.style.display = 'block';
     const game = new Board(canvas.width, canvas.height);
     game.draw(ctx);
 }
@@ -41,6 +44,7 @@ const main_menu = ()=>{
     let b_start = document.querySelector('#Gstart');
     let b_inst = document.querySelector('#Ginstructions');
     let b_inst_back = document.querySelector('#instBack');
+    lgswrapper.style.display = 'none';
     main_menu.style.display = 'block';
     //start game
     b_start.onclick = (e)=>{
@@ -59,6 +63,10 @@ const main_menu = ()=>{
         instHolder.style.display = 'none';
         menuHolder.style.display = 'block';
     }
+}
+
+ret_menu.onclick = ()=>{
+    main_menu();
 }
 const Game = () => {
     startAnimation();
