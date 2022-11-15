@@ -1,99 +1,68 @@
-import { Gate } from './gate.js';
-import { Input } from './lgsinput.js';
-import { Wire } from './wire.js';
-import { InputBit } from './inputbit.js';
-import { OutputBit } from './outputbit.js';
-import { Bottom } from './bottompanel.js';
-import { Menu } from './menu.js';
-import { startAnimation } from './startlogo.js';
-import { mainMenu } from './mainmenu.js';
+import { Board } from './board.js';
+import { instructions } from './instructions.js';
 
 
-window.addEventListener('DOMContentLoaded', () => {
-    startAnimation();
-    const canvas = document.querySelector('#canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth -6;
-    canvas.height = window.innerHeight - 6;
-    class Board {
-        constructor(width, height) {
-            this.width = width;
-            this.height = height;
-            this.bottom = new Bottom(this);
-            this.inputBit = new InputBit(this);
-            this.inputBit.bit.push({
-                x : this.inputBit.width,
-                y : this.height/2.2,
-                pinX : this.inputBit.width + 30,
-                pinY : this.height/2.2,
-                on : false
-            })
-            this.outputBit = new OutputBit(this);
-            this.outputBit.bit.push({
-                x : this.outputBit.x,
-                y : this.height/2.2,
-                pinX : this.outputBit.x - 30,
-                pinY : this.height/2.2,
-                on : false
-            })
-            this.allGate = [];
-            this.gate1 = new Gate(this);
-            //this.gate1.width = 200;
-            this.gate1.update();
-            this.gate2 = new Gate(this);
-            this.gate1.text = 'AND';
-            this.gate2.text = 'NOT';
-            this.gate2.color = '#DBBBF5';
-            this.gate2.x += 150;
-            this.gate2.input = 1;
-            this.gate2.update();
-            this.gate2.name = 'Not';
-            this.pinColor = '#ffffff';
-            this.wires = new Wire(this);
-            this.input = new Input(this);
-            this.menu = new Menu(this); //deleting gates, wires, and bits
-            this.allGate.push(this.gate1);
-            this.allGate.push(this.gate2);
 
-        }
-        clear(context) {
-            context.clearRect(0, 0, this.width, this.height);
-        }
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth -6;
+canvas.height = window.innerHeight - 6;
 
-        addGate(one) {
-            let gate = new Gate(this);
-            gate.x = this.width/2;
-            gate.y = this.height/2;
-            gate.input = one.input;
-            gate.output = one.output;
-            gate.color = one.color;
-            gate.text = one.name;
-            gate.update();
-            this.allGate.push(gate);
-            this.draw(ctx)
-        }
-        
-        draw(context) {
-            this.clear(context);
-            this.wires.calculate_signal();
-            this.inputBit.draw(context);
-            this.outputBit.draw(context);
-            for (let one of this.allGate) {
-                one.draw(context);
-            }
-            this.wires.draw(context);
-            this.bottom.draw(context);
-        }
-    }
-
+const startGame = ()=>{
     const game = new Board(canvas.width, canvas.height);
-
     game.draw(ctx);
+}
+const startAnimation = ()=>{
+    document.querySelector('#startlogo').style.display = 'block';
+    const logo = document.querySelector('#startlogo .holder');
+    let val = 1;
+    let op = 1;
+    
+    let logoInterval = setInterval(()=>{
+        if (val >= 1.6) {
+            clearInterval(logoInterval);
+            logo.style.display = 'none';
+            document.querySelector('#startlogo').style.display = 'none';
+            main_menu();
+        };
+        
+        logo.style.transform = `translate(-50%, -50%) scale(${val})`;
+        logo.style.opacity = op;
+        logo.style.display = 'block';
+        val = val + 0.2;
+        op -= 0.4;
+    },600)
+    
+}
+const main_menu = ()=>{
+    let main_menu = document.querySelector('#mainmenu');
+    let  menuHolder = main_menu.querySelector('.holder');
+    let instHolder = main_menu.querySelector('.instructions');
+    let b_start = document.querySelector('#Gstart');
+    let b_inst = document.querySelector('#Ginstructions');
+    let b_inst_back = document.querySelector('#instBack');
+    main_menu.style.display = 'block';
+    //start game
+    b_start.onclick = (e)=>{
+        e.preventDefault();
+        main_menu.style.display = 'none';
+        startGame();
+    }
+    b_inst.onclick = (e)=>{
+        e.preventDefault();
+        menuHolder.style.display = 'none';
+        instHolder.querySelector('#addinst').innerHTML = instructions();
+        instHolder.style.display = 'block';
+    }
+    b_inst_back.onclick = (e)=>{
+        e.preventDefault();
+        instHolder.style.display = 'none';
+        menuHolder.style.display = 'block';
+    }
+}
+const Game = () => {
+    startAnimation();
+    // main_menu();
+}
 
-
-    // //inputs outside of canvas
-    // const add_gate = document.querySelector('#try');
-    // add_gate.onclick = () => {
-    //     game.addGate();
-    // }
-})
+window.addEventListener('DOMContentLoaded', Game());
