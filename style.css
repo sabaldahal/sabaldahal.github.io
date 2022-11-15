@@ -598,9 +598,9 @@ footer {
     position: fixed;
     height: 100vh;
     width: 100vw;
-    display: block;
     background: #19241D;
     z-index: 99;
+    display: none;
 }
 #startlogo .holder{
     position: absolute;
@@ -619,6 +619,81 @@ footer {
 }
 #startlogo .holder span{
     color: #F3EFF5;
+}
+#mainmenu{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: none;
+    z-index: 99;
+    background: #1B3236;
+
+}
+#mainmenu .holder{
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color : #8F94A3;
+    transition: all linear .9s;
+    opacity: 1;
+}
+#mainmenu .holder button{
+    border: none;
+    width: 200px;
+    padding: 20px;
+    margin: 20px;
+    background: #FAF4D3;
+    color: #006661;
+    font-size: 18px;
+    cursor: pointer;
+}
+#mainmenu .holder button:hover{
+    background: #006661;
+    color: #FAF4D3;
+}
+#mainmenu .instructions{
+    position: absolute;
+    height: 100%;
+    padding: 20px 50px;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color : #8F94A3;
+    transition: all linear .9s;
+    opacity: 1;
+    display : none;
+    overflow-y: scroll;
+}
+#mainmenu .instructions::-webkit-scrollbar {
+    display: none;
+}
+
+#mainmenu .instructions {
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+#mainmenu .instructions button{
+    border: none;
+    position: relative;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    padding: 20px;
+    margin: 20px;
+    background: #FAF4D3;
+    color: #006661;
+    font-size: 18px;
+    cursor: pointer;
+}
+#mainmenu .instructions button:hover{
+    background: #006661;
+    color: #FAF4D3;
 }
 #returnHome{
     position: fixed;
