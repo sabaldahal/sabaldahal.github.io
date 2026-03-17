@@ -1,0 +1,31 @@
+#map {
+    width: 100%;
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+#map a{
+    text-decoration: none;
+    color: #000;
+}
+.map-popup {
+    position: absolute;
+  	width: 300px;
+    background-color: white;
+    margin: 0px;
+    padding: 20px;
+    transition: all 5s;
+    border-bottom: 5px solid grey;
+    color: rgb(0,0,0);
+}
+.map-popup h3{
+    text-align: center;
+}
+#map .ol-zoom, .ol-zoom-in, .ol-zoom-out,
+.ol-zoomslider{
+    margin-top: 20px;
+    cursor: pointer;
+}
+

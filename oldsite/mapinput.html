@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="tab-icon.png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <title>Sabal's Portfolio</title>
+</head>
+<body>
+        <header>
+            <div class="navbar">
+                <div>
+                    <a href="index.html">
+                        @sabaldahal
+                    </a>
+                </div>
+                <div class="socials">
+                    <a target="_blank" href="https://www.linkedin.com/in/sabal-dahal/"><i class="fa fa-brands fa-linkedin"></i></a>
+                    <a target="_blank" href="https://github.com/sabaldahal"><i class="fa fa-brands fa-github"></i></a>
+                    <a href="mailto:dahalsl@mail.uc.edu"><i class="fa fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </header>
+        <div class="form-full">
+            <div class="left">
+                <div class="instructions">
+                    <p>
+                        Instructions:
+                    </p>
+                    <ul>
+                        <li>
+                            Set the initial viewport of the map (This will center the map at the given coordinate)
+                        </li>
+                        <li>
+                            Specify the zoom level for the map
+                        </li>
+                        <li>
+                            For each marker, add its coordinate (This will position the marker at the given coordinate)
+                        </li>
+                        <li>
+                            (Optional) Add Title and Description for each marker 
+                        </li>
+                        <li>
+                            Click <button disabled style="color:#fff;">Add Marker</button> to add the marker on the list
+                        </li>
+                        <li>Click <button disabled style="color:#fff;">Generate</button> to generate the dynamic map
+                        </li>
+                        
+                    </ul>
+                    
+
+                    <p>Once you add a valid initial viewport's coordinate and a zoom value,
+                        you cannot change those values
+                    </p>
+                    <p>
+                        Markers added will be displayed below:
+                    </p>
+                </div>
+                <ol>
+
+                </ol>
+            </div>
+            <div class="right">
+
+            
+        <form>
+            <section class="">
+                MAP
+            </section>
+            
+            <div class="in-container">
+                <label for="lat-main">Initial ViewPort Coordinate*</label>
+                <input id="lat-main" name="lat-main" placeholder="latitude" type="number">
+            </div>
+            <div class="in-container">
+                <label for="long-main"></label>
+                <input id="long-main" name="long-main" placeholder="longitude" type="number">
+            </div>
+            <div class="in-container">
+                <label for="zoom"> Zoom* </label>
+                <select style="width: 50%; cursor: pointer; color: rgb(70, 70, 70);" name="zoom" id="zoom">
+                    <option value="">--please select a value--</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    
+                </select>
+           </div>
+            <div class="in-container markerContents">
+                <label for="lat"><strong>Add Marker Details*</strong></label>
+                <input id="lat" name="lat" placeholder="latitude" type="number">
+            </div>
+            <div class="in-container markerContents">
+                <label for="long"></label>
+                <input id="long" name="long" placeholder="longitude" type="number">
+            </div>
+            <div class="in-container markerContents">
+                <label for="title">Description For Marker</label>
+                <input id="title" name="title" placeholder="title goes here" type="text">
+            </div>
+            <div class="in-container markerContents">
+                <label for="description"></label>
+                <input id="description" name="description" placeholder="type the description here..." type="text">
+            </div>
+            <div class="markerCount">
+                Markers Added: <span></span>
+            </div>
+            <div class="errorbox">
+                
+            </div>
+            <button id="addmarker">Add Marker</button>
+            
+            <button id="sbmt" type="button">Generate</button>
+            <div style="clear:both; font-size:12px; display:block; width: 100%">*add all markers before clicking Generate button</div>
+        </form>
+    </div>
+</div>
+
+        <footer>
+        </footer>
+
+<!-- Load Scripts-->
+
+    <script src="map form_addmarker.js"></script>
+</body>
+</html>
