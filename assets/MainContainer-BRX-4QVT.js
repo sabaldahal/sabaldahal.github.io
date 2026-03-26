@@ -1,4 +1,4 @@
-import{j as e}from"./react-three-Bcw33EUV.js";import{R as g,b as h}from"./vendor-GNyAgWnR.js";import{H as M,T as S,N as E}from"./Navbar-BNDSKFsp.js";import{g as p}from"./gsap-DDlvirwQ.js";import{S as u}from"./ScrollTrigger-CB6UHAJl.js";import"./three-BGy_EcZz.js";const r={developer:{name:"Sabal",fullName:"Sabal Dahal"},social:{location:"Cincinnati, Ohio, United States"},about:{title:"About Me",description:`Software Engineer 
+import{j as e}from"./react-three-CuzxfF_g.js";import{R as g,b as h}from"./vendor-GNyAgWnR.js";import{H as M,T as S,N as E}from"./Navbar-BNcx-1Sc.js";import{g as p}from"./gsap-DDlvirwQ.js";import{S as u}from"./ScrollTrigger-CB6UHAJl.js";import"./three-CeqssRxd.js";const r={developer:{name:"Sabal",fullName:"Sabal Dahal"},social:{location:"Cincinnati, Ohio, United States"},about:{title:"About Me",description:`Software Engineer 
  University of Cincinnati 
  Bachelor's Degree 
  Computer Science 
